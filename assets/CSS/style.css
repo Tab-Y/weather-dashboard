@@ -1,5 +1,6 @@
 /* stlye */
 header {
-    background-image: linear-gradient(to right, blue, purple);
+    background-image: linear-gradient(to right, rgb(9, 9, 112), rgb(87, 14, 116));
     color: white;
+    padding: 5px 5px 10px 5px;
 }
