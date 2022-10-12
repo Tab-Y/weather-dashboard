@@ -36,7 +36,7 @@
 
 // // fetch coords (geo api)
 
-
+// check though 6-021 for logic structure example *****
 
 
 // // basic structure provided by seth
