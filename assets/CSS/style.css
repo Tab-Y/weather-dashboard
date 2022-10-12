@@ -1,6 +1,25 @@
 /* stlye */
+:root {
+    --white: rgb(244, 245, 222);
+    --light: azure;
+    --midBg: rgb(21, 73, 122);
+    --darkBg:  rgb(17, 4, 61);
+}
+
+body {
+    background-color: var(--light);
+    font-family: 'Rubik', sans-serif;
+}
 header {
-    background-image: linear-gradient(to right, rgb(9, 9, 112), rgb(87, 14, 116));
-    color: white;
+    background-image: linear-gradient(to right, var(--midBg), var(--darkBg));
+    color: var(--white);
     padding: 5px 5px 10px 5px;
+}
+.customCard {
+    background-color: var(--darkBg);
+    color: var(--white);
+}
+#searchBtn {
+    background-color: var(--midBg);
+    color: white;
 }
