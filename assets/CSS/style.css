@@ -16,18 +16,32 @@ header {
     color: var(--white);
     padding: 5px 5px 10px 5px;
 }
+/* 5 day forcast cards */
 .customCard {
     background-color: var(--darkBg);
-    border: 1px solid black;
+    border: 1px solid var(--midBg);
     border-radius: 0;
     color: var(--white);
 }
+/* current weather card */
 .customCardCurrent {
     border-radius: 0;
     border: 1px solid var(--darkBg);
 
 }
+
+/* created location buttons */
+.savedSearch.btn {
+    background-color: grey;
+    border: 1px solid var(--darkBg);
+    
+    margin-top: 5px;
+}
+
+/* static search button */
 #searchBtn {
     background-color: var(--midBg);
     color: white;
 }
+
+/* add media queries for forecast to stack*/

@@ -1,17 +1,130 @@
-// // need 3rd party api's to make weather app
+// current day forecast of target
+var currentDayEl = document.getElementById("currentDay");
+// 5 day forecast of target // dynamically create the cards
+var fiveDayForecastEl = document.getElementById("fiveDayForecast");
+// save the searches as buttons
+var savedCitiesEl = document.getElementById("savedCities");
+// search button element
+var searchBtnEl = document.getElementById("searchBtn");
+// geocoding API  ->  gets lat and lon for other fetches
+var geocodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q="
+// current weather API
+var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?"
+// 5 day API
+var fiveDayUrl = "api.openweathermap.org/data/2.5/forecast?"
+// API key  ->  used in each fetch
+var apiKey = "&appid=c068a7f51cbaf75b97e728732e4f8c60"
 
-// // each card must display
-// // city name (the date)
-// // an icon for weather (rain, sunny, cloudy, ect)
-// // temperature
-// // humidity
-// // wind speed
-// // *uv index was shown in class*
-// // 5 cards for 5 days (5 days out)
-// // current (day) has full width
+
+
+
+
+// save search in local storage
+function saveSearch () {
+    // the searched city // take the input and put into geocoding API
+    var searchFor = document.getElementById("location").value;
+    var searched = JSON.parse(localStorage.getItem('searched')) || [];
+    searched.push(searchFor);
+    localStorage.setItem('searched', JSON.stringify(searched));
+    clearSearched();
+    renderSearch();
+    makeSearch();
+};
+
+// puts the searched cities saved in local storage onto list
+function renderSearch () {
+    var searched = JSON.parse(localStorage.getItem('searched'));
+    if (!searched){
+        return;
+    }
+    for (var i=0;i<searched.length; i++){
+        console.log(searched[i])
+        var savedBtnEl = document.createElement('button');
+        savedBtnEl.classList.add('savedSearch');
+        savedBtnEl.classList.add('btn');
+        savedBtnEl.textContent = searched[i];
+        savedCitiesEl.appendChild(savedBtnEl);
+    }
+};
+// clears search buttons so duplicates dont show up
+function clearSearched(){
+    while (savedCitiesEl.firstChild){
+        savedCitiesEl.removeChild(savedCitiesEl.firstChild);
+    }
+};
+
+function makeSearch() {
+    fetch(geocodingUrl+document.getElementById("location").value+"&limit=5"+apiKey)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            var lat = "lat="+data[0].lat;
+            var lon = "&lon="+data[0].lon;
+            // uses previous fetch for lat and long, sets temp to imperial (fahrenheit)
+            fetch(currentWeatherUrl+lat+lon+"&units=imperial"+apiKey)
+            .then(function (response2) {
+                return response2.json();
+            })
+            .then(function (data2) {
+
+                console.log(data2.main.temp);
+            })
+            // fetch(fiveDayUrl+lat+lon+"&units=imperial"+apiKey)
+            // .then(function (response3) {
+            //     return response3.json();
+            // })
+            // .then(function (data3) {
+            //     console.log(data3);
+            // })
+        });
+    // fetch geocoding API lat and lon
+    // then fetch current weather
+    //- renderCurrentDay();
+    // start function to print to current card
+    // then fetch 5 day
+    // calls card function 5 times for 5 different objects (1 for each day)
+    //- render5Day();
+};
+
+
+
+function render5Day(){
+    // create <h3> 5 day forecast :</h3>
+    // append <h3> to div id fiveDayForecast
+    // start loop for 5 cards
+    // search through JSON info and get what is needed as variables
+    // create elements and put info in place
+    // <div class="col">
+    // <ul class="card customCard"> date
+    // create <li><i> weather icon</i></li>
+    // append to <ul>
+    // create <li>temp</li>
+    // append to <ul>
+    // create <li>wind speed</li>
+    // append to <ul>
+    // create <li>humidity</li>
+    // appened to <ul>
+    // append <ul> to <div>
+    // append <div> to fiveDayForecast
+};
+
+function renderCurrentDay(){
+    // creates current card
+    // <ul> city name and date (data[0].name)
+    // <li><i> weather icon (link is https://openweathermap.org/img/wn/+data[0].weather(array)[0].icon+.png   ./description)
+    // <li> for each : temp (data2.main.temp), wind speed(data.wind.speed), humidity (data.main.humidity)
+}
+
+// calls for saved list on load
+renderSearch();
+
+// needs event listener for already searched to load them again -- // -- need page reset for inbetween searches to not stack multiple cities
+searchBtnEl.addEventListener('click', saveSearch);
+// need 3rd party api's to make weather app
+
 
 // // create the elements to dynamically build page
-// // li for pulled data, appended into ul appended after h1 for date into card div, appended card div to page within 5day section || the curent day
 
 // // stored searches as buttons to do searches again
 // // (append searches as buttons based on search click)
