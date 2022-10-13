@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.slim.js">
     <link rel="stylesheet" href="./assets/CSS/style.css">
     <title>Weather Dashboard</title>
 </head>
@@ -29,7 +28,7 @@
             <div>
                 <h2>Search for city :</h2>
                 <input type="text" class="w-100">
-                <button class="w-100" id="searchBtn">search</button>
+                <button class="w-100 mt-3" id="searchBtn">search</button>
                 <hr>
                 </hr>
             </div>
@@ -37,51 +36,57 @@
                 <!-- results go here as buttons-->
             </article>
         </aside>
-        <section class="col-9">
-            <div class="row card" id="currentDay">main card for current day city, date, and weather icon
-                <ul>
+        <section class="col-9 start">
+            <div class="row card mt-3 m-1 customCardCurrent" id="currentDay">
+                <ul>main card for current day city, date
+                    <li><i> weather icon </i></li>
                     <li>temp</li>
                     <li>wind speed</li>
                     <li>humidity</li>
                     <li>us index</li>
                 </ul>
             </div>
-            <div class="row" id="fiveDayForecast">
+            <div class="row mt-3" id="fiveDayForecast">
                 <h3>5 day forcast :</h3>
-                <div class="card col customCard">1 day out The date w/ weather icon
-                    <ul>
+                <div class="col">
+                    <ul class="card customCard">1 day out The date 
+                        <li><i> weather icon </i></li>
                         <li>temp</li>
                         <li>wind speed</li>
                         <li>humidity</li>
                         <li>us index</li>
                     </ul>
                 </div>
-                <div class="card col customCard">2 days out The date w/ weather icon
-                    <ul>
+                <div class="col">
+                    <ul class="card customCard">2 days out The date
+                        <li><i> weather icon </i></li>
                         <li>temp</li>
                         <li>wind speed</li>
                         <li>humidity</li>
                         <li>us index</li>
                     </ul>
                 </div>
-                <div class="card col customCard">3 days out The date w/ weather icon
-                    <ul>
+                <div class="col">
+                    <ul class="card customCard">3 days out The date
+                        <li><i> weather icon </i></li>
                         <li>temp</li>
                         <li>wind speed</li>
                         <li>humidity</li>
                         <li>us index</li>
                     </ul>
                 </div>
-                <div class="card col customCard">4 days out The date w/ weather icon
-                    <ul>
+                <div class="col">
+                    <ul class="card customCard">4 days out The date
+                        <li><i> weather icon </i></li>
                         <li>temp</li>
                         <li>wind speed</li>
                         <li>humidity</li>
                         <li>us index</li>
                     </ul>
                 </div>
-                <div class="card col customCard">5 days out The date w/ weather icon
-                    <ul>
+                <div class="col">
+                    <ul class="card customCard">5 days out The date
+                        <li><i> weather icon </i></li>
                         <li>temp</li>
                         <li>wind speed</li>
                         <li>humidity</li>
@@ -92,7 +97,7 @@
         </section>
     </main>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.slim.js" integrity="sha512-1cF8XUz5U3BlnRVqNFn+aPNwwSr/FPtrmKvM1g4dJJ9tg8kmqRUzqbSOvRRAMScDnTkOcOnnfwF3+jRA/nE2Ow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
