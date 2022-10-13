@@ -12,7 +12,7 @@ var geocodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q=";
 // current weather API
 var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
 // 5 day API
-var fiveDayUrl = "api.openweathermap.org/data/2.5/forecast?";
+var fiveDayUrl = "http://api.openweathermap.org/data/2.5/forecast?";
 // API key  ->  used in each fetch
 var apiKey = "&appid=c068a7f51cbaf75b97e728732e4f8c60";
 
@@ -61,7 +61,7 @@ function clearSearched(){
 
 
 function makeSearch() {
-    fetch(geocodingUrl+document.getElementById("location").value+"&limit=5"+apiKey)
+    fetch(geocodingUrl+document.getElementById("location").value+apiKey)
     .then(function (response) {
         return response.json();
     })
@@ -75,11 +75,11 @@ function makeSearch() {
         })
         .then(function (data2) {
             
-            console.log(data2.main.temp);
+            console.log(data2);
             // resets search criteria
-            tempCitySearch = [];
-            lat = [];
-            lon = [];
+            // tempCitySearch = [];
+            // lat = [];
+            // lon = [];
         })
         // fetch(fiveDayUrl+lat+lon+"&units=imperial"+apiKey)
         // .then(function (response3) {
@@ -142,7 +142,7 @@ savedCitiesEl.addEventListener('click', function (event){
         var searchAgain = event.target.textContent;
         tempCitySearch.push(searchAgain)
         document.getElementById("location").textContent = searchAgain;
-        console.log(tempCitySearch)
+        console.log(tempCitySearch[0])
         // saveSearch();
     }
 
