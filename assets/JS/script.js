@@ -6,25 +6,31 @@ var fiveDayForecastEl = document.getElementById("fiveDayForecast");
 var savedCitiesEl = document.getElementById("savedCities");
 // search button element
 var searchBtnEl = document.getElementById("searchBtn");
+var savedSearchBtn = document.querySelector(".savedSearch");
 // geocoding API  ->  gets lat and lon for other fetches
-var geocodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q="
+var geocodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q=";
 // current weather API
-var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?"
+var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
 // 5 day API
-var fiveDayUrl = "api.openweathermap.org/data/2.5/forecast?"
+var fiveDayUrl = "api.openweathermap.org/data/2.5/forecast?";
 // API key  ->  used in each fetch
-var apiKey = "&appid=c068a7f51cbaf75b97e728732e4f8c60"
+var apiKey = "&appid=c068a7f51cbaf75b97e728732e4f8c60";
 
-
-
+var tempCitySearch = [];
+var lat = [];
+var lon = [];
+// make array to hold and be updated about the search
+// is cleared after search is complete
+// if saved search button is pressed, puts text in and searches
 
 
 // save search in local storage
 function saveSearch () {
     // the searched city // take the input and put into geocoding API
-    var searchFor = document.getElementById("location").value;
+    // need conditional to not make a button for same name
+    var tempCitySearch = document.getElementById("location").value.trim();
     var searched = JSON.parse(localStorage.getItem('searched')) || [];
-    searched.push(searchFor);
+    searched.push(tempCitySearch);
     localStorage.setItem('searched', JSON.stringify(searched));
     clearSearched();
     renderSearch();
@@ -38,7 +44,6 @@ function renderSearch () {
         return;
     }
     for (var i=0;i<searched.length; i++){
-        console.log(searched[i])
         var savedBtnEl = document.createElement('button');
         savedBtnEl.classList.add('savedSearch');
         savedBtnEl.classList.add('btn');
@@ -53,31 +58,37 @@ function clearSearched(){
     }
 };
 
+
+
 function makeSearch() {
     fetch(geocodingUrl+document.getElementById("location").value+"&limit=5"+apiKey)
-        .then(function (response) {
-            return response.json();
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        var lat = "lat="+data[0].lat;
+        var lon = "&lon="+data[0].lon;
+        // uses previous fetch for lat and long, sets temp to imperial (fahrenheit)
+        fetch(currentWeatherUrl+lat+lon+"&units=imperial"+apiKey)
+        .then(function (response2) {
+            return response2.json();
         })
-        .then(function (data) {
-            var lat = "lat="+data[0].lat;
-            var lon = "&lon="+data[0].lon;
-            // uses previous fetch for lat and long, sets temp to imperial (fahrenheit)
-            fetch(currentWeatherUrl+lat+lon+"&units=imperial"+apiKey)
-            .then(function (response2) {
-                return response2.json();
-            })
-            .then(function (data2) {
-
-                console.log(data2.main.temp);
-            })
-            // fetch(fiveDayUrl+lat+lon+"&units=imperial"+apiKey)
-            // .then(function (response3) {
+        .then(function (data2) {
+            
+            console.log(data2.main.temp);
+            // resets search criteria
+            tempCitySearch = [];
+            lat = [];
+            lon = [];
+        })
+        // fetch(fiveDayUrl+lat+lon+"&units=imperial"+apiKey)
+        // .then(function (response3) {
             //     return response3.json();
             // })
             // .then(function (data3) {
-            //     console.log(data3);
-            // })
-        });
+                //     console.log(data3);
+                // })
+            });
     // fetch geocoding API lat and lon
     // then fetch current weather
     //- renderCurrentDay();
@@ -108,7 +119,6 @@ function render5Day(){
     // append <ul> to <div>
     // append <div> to fiveDayForecast
 };
-
 function renderCurrentDay(){
     // creates current card
     // <ul> city name and date (data[0].name)
@@ -116,11 +126,31 @@ function renderCurrentDay(){
     // <li> for each : temp (data2.main.temp), wind speed(data.wind.speed), humidity (data.main.humidity)
 }
 
+
 // calls for saved list on load
 renderSearch();
 
 // needs event listener for already searched to load them again -- // -- need page reset for inbetween searches to not stack multiple cities
-searchBtnEl.addEventListener('click', saveSearch);
+searchBtnEl.addEventListener('click', function(event){
+    event.preventDefault();
+    saveSearch()
+    });
+savedCitiesEl.addEventListener('click', function (event){
+    event.preventDefault();
+    var element = event.target;
+    if (element.matches("button") === true) {
+        var searchAgain = event.target.textContent;
+        tempCitySearch.push(searchAgain)
+        document.getElementById("location").textContent = searchAgain;
+        console.log(tempCitySearch)
+        // saveSearch();
+    }
+
+    // var searchForAgain = document.getElementById("location");
+    // searchForAgain.textContent = event.target
+
+}
+);
 // need 3rd party api's to make weather app
 
 
