@@ -58,29 +58,37 @@ function clearSearched() {
     }
 };
 
+function noCityListed () {
+    alert("Sorry, that city is not in our database. Please look for a different city.")
+}
+
 function makeSearch() {
     fetch(geocodingUrl + document.getElementById("location").value + apiKey)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            var lat = "lat=" + data[0].lat;
-            var lon = "&lon=" + data[0].lon;
-            // uses previous fetch for lat and long, sets temp to imperial (fahrenheit)
-            fetch(currentWeatherUrl + lat + lon + "&units=imperial" + apiKey)
+            if(data.length>0){
+                var lat = "lat=" + data[0].lat;
+                var lon = "&lon=" + data[0].lon;
+                // uses previous fetch for lat and long, sets temp to imperial (fahrenheit)
+                fetch(currentWeatherUrl + lat + lon + "&units=imperial" + apiKey)
                 .then(function (response2) {
                     return response2.json();
                 })
                 .then(function (data2) {
                     renderCurrentDay(data2);
                 })
-            fetch(fiveDayUrl + lat + lon + "&units=imperial" + apiKey)
+                fetch(fiveDayUrl + lat + lon + "&units=imperial" + apiKey)
                 .then(function (response3) {
                     return response3.json();
                 })
                 .then(function (data3) {
                     render5Day(data3)
                 })
+            } else {
+                noCityListed();
+            }
         });
 };
 
