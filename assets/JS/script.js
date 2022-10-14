@@ -19,10 +19,6 @@ var apiKey = "&appid=c068a7f51cbaf75b97e728732e4f8c60";
 var tempCitySearch = [];
 var lat = [];
 var lon = [];
-// make array to hold and be updated about the search
-// is cleared after search is complete
-// if saved search button is pressed, puts text in and searches
-
 
 // save search in local storage
 function saveSearch() {
@@ -30,11 +26,15 @@ function saveSearch() {
     // need conditional to not make a button for same name
     var tempCitySearch = document.getElementById("location").value.trim();
     var searched = JSON.parse(localStorage.getItem('searched')) || [];
-    searched.push(tempCitySearch);
-    localStorage.setItem('searched', JSON.stringify(searched));
-    clearSearched();
-    renderSearch();
-    makeSearch();
+    if (searched.includes(tempCitySearch)){
+    // prevents duplicate buttons
+    } else {
+        searched.push(tempCitySearch);
+    }
+        localStorage.setItem('searched', JSON.stringify(searched));
+        clearSearched();
+        renderSearch();
+        makeSearch();
 };
 
 // puts the searched cities saved in local storage onto list
@@ -113,11 +113,11 @@ function render5Day(data3) {
             var iconImg = '<img src="https://openweathermap.org/img/wn/'+midDayWeather[i].weather[0].icon+'.png"></img>'
             liEl1.innerHTML = iconImg;
             ulEl.append(liEl1);
-            liEl2.textContent = "Temp : " + midDayWeather[i].main.temp;
+            liEl2.textContent = "Temp : " + midDayWeather[i].main.temp + " fahrenheit";
             ulEl.append(liEl2); 
-            liEl3.textContent = "Wind Speed :" + midDayWeather[i].wind.speed;
+            liEl3.textContent = "Wind Speed :" + midDayWeather[i].wind.speed + " mph";
             ulEl.append(liEl3);
-            liEl4.textContent = "Humidity :" + midDayWeather[i].main.humidity;
+            liEl4.textContent = "Humidity :" + midDayWeather[i].main.humidity + " %";
             ulEl.append(liEl4);
             containerDiv.append(ulEl);
             fiveDayForecastEl.append(containerDiv);
@@ -126,6 +126,7 @@ function render5Day(data3) {
         makeCards();
     }
 };
+
 function renderCurrentDay(data2) {
     while (currentDayEl.firstChild) {
         currentDayEl.removeChild(currentDayEl.firstChild)
@@ -139,11 +140,11 @@ function renderCurrentDay(data2) {
     var iconImg = '<img src="https://openweathermap.org/img/wn/'+data2.weather[0].icon+'.png"></img>'
     liEl1.innerHTML = iconImg;
     ulEl.append(liEl1);
-    liEl2.textContent = "Temp : " + data2.main.temp;
+    liEl2.textContent = "Temp : " + data2.main.temp + " fahrenheit";
     ulEl.append(liEl2); 
-    liEl3.textContent = "Wind Speed :" + data2.wind.speed;
+    liEl3.textContent = "Wind Speed :" + data2.wind.speed + " mph";
     ulEl.append(liEl3);
-    liEl4.textContent = "Humidity :" + data2.main.humidity;
+    liEl4.textContent = "Humidity :" + data2.main.humidity +" %";
     ulEl.append(liEl4);
     currentDayEl.appendChild(ulEl);
 }
@@ -151,39 +152,17 @@ function renderCurrentDay(data2) {
 // calls for saved list on load
 renderSearch();
 
-// needs event listener for already searched to load them again -- // -- need page reset for inbetween searches to not stack multiple cities
+
 searchBtnEl.addEventListener('click', function (event) {
     event.preventDefault();
-    saveSearch()
+    saveSearch();
 });
 savedCitiesEl.addEventListener('click', function (event) {
     event.preventDefault();
     var element = event.target;
     if (element.matches("button") === true) {
-        var searchAgain = event.target.textContent;
-        tempCitySearch.push(searchAgain)
-        document.getElementById("location").textContent = searchAgain;
-        // saveSearch();
+        document.getElementById("location").value = event.target.textContent;
+        makeSearch();
     }
-
-    // var searchForAgain = document.getElementById("location");
-    // searchForAgain.textContent = event.target
-
 }
 );
-// need 3rd party api's to make weather app
-
-
-// // create the elements to dynamically build page
-
-// // stored searches as buttons to do searches again
-// // (append searches as buttons based on search click)
-
-// // render search
-// // clear history (current display)
-// // update info
-
-// // function for 1 card
-// // loop through function for each day needed
-
-// check though 6-021 for logic structure example *****

@@ -28,7 +28,7 @@
         <h1 class="col"> Weather Dashboard </h1>
     </header>
     <main class="row">
-        <aside class="col-2 p-3">
+        <aside class="col-lg-2 col-md-6 col-sm-12 p-3">
             <div class="row">
                 <h2>Search for city :</h2>
                 <input type="text" class="w-100" id="location" placeholder="Orlando">
@@ -40,67 +40,15 @@
                 <!-- search results go here as buttons ** create buttons with class savedSearch and btn-->
             </article>
         </aside>
-        <section class="col-9 start">
+        <section class="col-lg-9 start">
             <div class="row card mt-3 m-1 customCardCurrent" id="currentDay">
-                <!-- create <ul> with city name, current date as text -->
-                <ul>main card for current day city, date
-                    <!-- append an <i> inside a <li> for weather icon  -->
-                    <li><i> weather icon </i></li>
-                    <!-- append <li> for each temp, wind speed, humidity inside <ul> -->
-                    <li>temp</li>
-                    <li>wind speed</li>
-                    <li>humidity</li>
-                </ul>
+                <!-- create <ul> with city name, current date as text -->  
+                    <h3>Thanks for visiting. Please search for a city to begin, or click on a previous search.</h3>
+
             </div>
             <div class="row mt-3" id="fiveDayForecast">
-                <!-- add text to h3 element for 5 day forcast -->
-                <h3>5 day forcast :</h3>
-                <div class="col">
-                    <!-- loop to make 5 days -->
-                    <!-- start with div with class of col -->
-                    <!-- give each day class of card and customCard -->
-                    <!-- <ul> with date -->
-                    <ul class="card customCard">1 day out The date 
-                        <!-- <li><i> for icon -->
-                        <li><i> weather icon </i></li>
-                        <!-- <li> for each temp, wind speed, humidity -->
-                        <li>temp</li>
-                        <li>wind speed</li>
-                        <li>humidity</li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <ul class="card customCard">2 days out The date
-                        <li><i> weather icon </i></li>
-                        <li>temp</li>
-                        <li>wind speed</li>
-                        <li>humidity</li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <ul class="card customCard">3 days out The date
-                        <li><i> weather icon </i></li>
-                        <li>temp</li>
-                        <li>wind speed</li>
-                        <li>humidity</li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <ul class="card customCard">4 days out The date
-                        <li><i> weather icon </i></li>
-                        <li>temp</li>
-                        <li>wind speed</li>
-                        <li>humidity</li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <ul class="card customCard">5 days out The date
-                        <li><i> weather icon </i></li>
-                        <li>temp</li>
-                        <li>wind speed</li>
-                        <li>humidity</li>
-                    </ul>
-                </div>
+                <!-- five day forecast goes here -->
+                
             </div>
         </section>
     </main>

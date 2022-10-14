@@ -20,12 +20,12 @@ header {
 .customCard {
     background-color: var(--darkBg);
     border: 1px solid var(--midBg);
-    border-radius: 0;
+    border-radius: 5px;
     color: var(--white);
 }
 /* current weather card */
 .customCardCurrent {
-    border-radius: 0;
+    border-radius: 5px;
     border: 1px solid var(--darkBg);
 
 }
@@ -44,4 +44,9 @@ header {
     color: white;
 }
 
-/* add media queries for forecast to stack*/
+li {
+    font-size: 18px;
+}
+ul {
+    font-size: 24px;
+}
