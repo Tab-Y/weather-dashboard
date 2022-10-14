@@ -8,11 +8,11 @@ var savedCitiesEl = document.getElementById("savedCities");
 var searchBtnEl = document.getElementById("searchBtn");
 var savedSearchBtn = document.querySelector(".savedSearch");
 // geocoding API  ->  gets lat and lon for other fetches
-var geocodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q=";
+var geocodingUrl = "https://api.openweathermap.org/geo/1.0/direct?q=";
 // current weather API
 var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?";
 // 5 day API
-var fiveDayUrl = "http://api.openweathermap.org/data/2.5/forecast?";
+var fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?";
 // API key  ->  used in each fetch
 var apiKey = "&appid=c068a7f51cbaf75b97e728732e4f8c60";
 
